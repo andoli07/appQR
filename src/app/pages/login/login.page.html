@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="warning">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <div class="flex-center">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title color="warning">Iniciar Sesion</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ion-item>
+          <ion-input type="email" label="Correo Electrónico" labelPlacement="floating" placeholder="john@duocuc.cl"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="password" label="Contraseña" labelPlacement="floating" placeholder=""></ion-input>
+        </ion-item>
+        <ion-button expand="block" color="secondary" fill="outline">Recuperar correo/contraseña</ion-button>
+        <ion-button color="primary" size="full" shape="round">Entrar</ion-button>
+        <ion-button color="primary" size="full" fill="clear" shape="round" >Registrarse</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
