@@ -9,8 +9,13 @@ import { Router } from '@angular/router';
 export class PerfilPage implements OnInit {
   username = '';
   constructor(private router: Router) {
+    const navegacion = this.router.getCurrentNavigation();
+    const state = navegacion?.extras.state as {
+      username: '';
+      password: '';
+    };
+    this.username = state.username;
   }
-  ngOnInit() {
-    
+
+  ngOnInit() {}
   }
-}

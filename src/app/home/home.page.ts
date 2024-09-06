@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,15 +13,29 @@ export class HomePage {
     password: '',
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
 
-  goToProfile() {
-   
-    this.router.navigate(['/perfil'], {
-      state: {
-        username: this.user.username
+  }
+
+  validar() {
+    if (this.user.username.length != 0) {
+      if (this.user.password.length != 0) {
+        //Funciona
+        let navigationExtras: NavigationExtras = {
+          state: {
+            username: this.user.username,
+            password: this.user.password,
+          },
+        };
+        this.router.navigate(['/perfil'],navigationExtras);
+      } else {
+        console.log('Contraseña vacia');
+        //No funciona
       }
-    });
+    } else {
+      console.log('Usuario vacio');
+      //Tampoco funciona
+    }
   }
 
 }
