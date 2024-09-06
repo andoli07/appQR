@@ -19,7 +19,7 @@
       
       <ion-card-header>
         <ion-card-subtitle>Iniciar sesión</ion-card-subtitle>
-        <ion-card-title color="warning">Credenciales</ion-card-title>
+        <ion-card-title>Credenciales</ion-card-title>
       </ion-card-header>
     
       <ion-card-content>
@@ -33,11 +33,12 @@
             </ion-input>
           </ion-item>
           <ion-item>
-            <ion-toggle justify="end">Recuérdame</ion-toggle><br /><br />
+            <ion-toggle justify="end">Recuérdame</ion-toggle>
           </ion-item>
+          <br>
           <ion-button color="primary" size="full" shape="round" (click)="validar()">Entrar</ion-button>
           <ion-button color="primary" size="full" fill="clear" shape="round" >Registrarse</ion-button>
-          <ion-button color="secondary" fill="outline" routerLink="/reset">Recuperar correo/contraseña</ion-button>
+          <ion-button color="secondary" size="full" fill="clear" shape="round" routerLink="/reset">Recuperar correo/contraseña</ion-button>
         </ion-list>
       </ion-card-content>
     </ion-card>

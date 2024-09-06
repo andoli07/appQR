@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" id="container" >
   <div class="flex-center" id="reset-card">
     <ion-card>
       <ion-card-header>
@@ -15,6 +15,7 @@
         <ion-item>
           <ion-input type="email" label="Correo Electrónico" labelPlacement="floating" placeholder="john@duocuc.cl"></ion-input>
         </ion-item>
+        <br>
         <ion-button color="primary" size="full" shape="round">Restablecer</ion-button>
         <ion-button color="primary" size="full" fill="clear" shape="round"routerLink="/home">Volver</ion-button>
       </ion-card-content>

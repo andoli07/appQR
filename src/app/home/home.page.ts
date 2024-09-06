@@ -27,7 +27,10 @@ export class HomePage {
             password: this.user.password,
           },
         };
-        this.router.navigate(['/perfil'],navigationExtras);
+        this.router.navigate(['/loader'],navigationExtras);
+        setTimeout(() => {
+          this.router.navigate(['/perfil'],navigationExtras);
+        }, 3000);
       } else {
         console.log('Contraseña vacia');
         //No funciona

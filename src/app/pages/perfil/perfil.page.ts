@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { AnimationController } from '@ionic/angular';
 
 @Component({
   selector: 'app-perfil',
@@ -7,8 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
+
   username = '';
-  constructor(private router: Router) {
+  constructor(private router: Router, private animationController: AnimationController) {
     const navegacion = this.router.getCurrentNavigation();
     const state = navegacion?.extras.state as {
       username: '';
@@ -18,4 +20,5 @@ export class PerfilPage implements OnInit {
   }
 
   ngOnInit() {}
-  }
+}
+
