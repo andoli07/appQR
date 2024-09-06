@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Duoc
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,37 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Duoc</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-card>
+     
+      
+      <ion-card-header>
+        <ion-card-subtitle>Iniciar sesión</ion-card-subtitle>
+        <ion-card-title color="warning">Credenciales</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-input type="text" label="Usuario" labelPlacement="floating" placeholder="Ingresar Usuario">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" label="Contraseña" labelPlacement="floating" placeholder="Ingresar Contraseña">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-toggle justify="end">Recuérdame</ion-toggle><br /><br />
+          </ion-item>
+          <ion-button color="primary" size="full" shape="round" (click)="goToProfile()">Entrar</ion-button>
+          <ion-button color="primary" size="full" fill="clear" shape="round" >Registrarse</ion-button>
+          <ion-button color="secondary" fill="outline" routerLink="/reset">Recuperar correo/contraseña</ion-button>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  user = {
+    username: '',
+    password: '',
+  };
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+  goToProfile() {
+   
+    this.router.navigate(['/perfil'], {
+      state: {
+        username: this.user.username
+      }
+    });
+  }
 
 }
