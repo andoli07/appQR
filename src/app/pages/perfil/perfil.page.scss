@@ -1,0 +1,27 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .profile-image {
+    width: 100px; /* Ajusta el tamaño según sea necesario */
+    height: 100px; /* Ajusta el tamaño según sea necesario */
+    border-radius: 50%;
+    object-fit: cover; /* Asegura que la imagen mantenga su proporción y se ajuste dentro del círculo */
+    border: 2px solid #ccc; /* Opcional: agrega un borde para resaltar la imagen */
+  }
+
+  ion-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Permite que la tarjeta se expanda completamente */
+  }
+  
+  ion-col {
+    display: flex;
+    align-items: stretch;
+  }
+  
+  
