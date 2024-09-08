@@ -1,10 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    
     <ion-buttons slot="start">
       <ion-menu-button auto-hide="false"></ion-menu-button>
     </ion-buttons>
-
     <ion-title slot="end">Perfil de alumno</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -15,19 +13,16 @@
       <ion-title size="large">Profile</ion-title>
     </ion-toolbar>
   </ion-header>
-  
-  
-  
+
   <div>
     <ion-card>
       <ion-card-header>
-        <div class="profile-container">
+        <div class="profile-image-container">
           <img src="assets/img/sakuragi.jpg" alt="Profile Image" class="profile-image" />
         </div>
         <ion-card-title>¡Bienvenido, {{username}}!</ion-card-title>
-        
       </ion-card-header>
-    
+
       <ion-card-content>
         ¿En cuál asignatura deseas marcar tu asistencia?
       </ion-card-content>
@@ -36,8 +31,8 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col  size="6" *ngFor="let card of cards" #card>
-        <ion-card>
+      <ion-col size="6" *ngFor="let card of cards; let i = index">
+        <ion-card class="card" (click)="onCardSelect(i)">
           <img [src]="card.imgSrc" alt="{{card.title}}" style="width: 100%; height: auto;" />
           <ion-card-header>
             <ion-card-title>{{ card.title }}</ion-card-title>
@@ -49,5 +44,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  
+
+  <ion-button expand="full" (click)="markAttendance()">Marcar Asistencia</ion-button>
 </ion-content>

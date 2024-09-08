@@ -1,27 +1,107 @@
-.profile-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-  }
-  
-  .profile-image {
-    width: 100px; /* Ajusta el tamaño según sea necesario */
-    height: 100px; /* Ajusta el tamaño según sea necesario */
-    border-radius: 50%;
-    object-fit: cover; /* Asegura que la imagen mantenga su proporción y se ajuste dentro del círculo */
-    border: 2px solid #ccc; /* Opcional: agrega un borde para resaltar la imagen */
-  }
 
-  ion-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%; /* Permite que la tarjeta se expanda completamente */
+/* Animación para el contenedor principal */
+@keyframes fadeInSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  ion-col {
-    display: flex;
-    align-items: stretch;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  
+}
+
+.profile-image-container {
+  perspective: 1000px; /* Proporciona la perspectiva para el efecto 3D */
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.profile-image {
+  width: 100px; /* Ajusta el tamaño según sea necesario */
+  height: 100px; /* Ajusta el tamaño según sea necesario */
+  border-radius: 50%;
+  object-fit: cover; /* Asegura que la imagen mantenga su proporción y se ajuste dentro del círculo */
+  border: 2px solid #ccc; /* Opcional: agrega un borde para resaltar la imagen */
+  transition: transform 0.8s; /* Transición para el efecto de flip */
+}
+
+.profile-image-container:hover .profile-image {
+  transform: rotateY(180deg);
+}
+
+/* Animación de escala para las tarjetas */
+@keyframes scalePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Animación de entrada para las tarjetas */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ion-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Permite que la tarjeta se expanda completamente */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para animaciones de tarjeta */
+}
+
+.ion-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra al pasar el cursor */
+}
+
+.ion-col {
+  display: flex;
+  align-items: stretch;
+}
+
+.ion-grid ion-row ion-col {
+  --ion-col-index: 0;
+}
+
+.ion-col:nth-child(1) {
+  --ion-col-index: 1;
+}
+
+.ion-col:nth-child(2) {
+  --ion-col-index: 2;
+}
+
+.ion-col:nth-child(3) {
+  --ion-col-index: 3;
+}
+
+.ion-col:nth-child(4) {
+  --ion-col-index: 4;
+}
+
+.subject-card {
+  animation: fadeInUp 0.5s ease-out;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.subject-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
