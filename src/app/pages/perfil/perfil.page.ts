@@ -1,5 +1,4 @@
-
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimationController } from '@ionic/angular';
 
@@ -18,34 +17,65 @@ export class PerfilPage implements OnInit {
   selectedCardIndex: number | null = null;
   username = '';
 
-  constructor(private router: Router, private animationController: AnimationController) {}
+  constructor(private router: Router, private animationController: AnimationController, private renderer: Renderer2) {}
 
   ngOnInit() {
     const navegacion = this.router.getCurrentNavigation();
     const state = navegacion?.extras.state as { username: string };
     this.username = state?.username || 'Alumno';
+
+    const profileImage = document.querySelector('.profile-image');
+    if (profileImage) {
+      this.loopProfileAnimation(profileImage);
+    }
+  }
+
+  loopProfileAnimation(element: any) {
+    const rotateAnimation = this.animationController.create()
+      .addElement(element)
+      .duration(2000)
+      .iterations(Infinity)
+      .easing('ease-in-out')
+      .fromTo('transform', 'rotateY(0)', 'rotateY(360deg)');
+
+    rotateAnimation.play();
   }
 
   onCardSelect(index: number) {
+    const previouslySelectedCard = this.selectedCardIndex !== null 
+      ? document.querySelectorAll('.card')[this.selectedCardIndex] 
+      : null;
+
     this.selectedCardIndex = index;
 
     const selectedCard = document.querySelectorAll('.card')[index];
     if (selectedCard) {
+      if (previouslySelectedCard) {
+        this.resetCardAnimation(previouslySelectedCard);
+      }
+
+      // Aplicar borde azul difuminado a la tarjeta seleccionada
+      selectedCard.classList.add('selected');
+      
       const animation = this.animationController.create()
         .addElement(selectedCard)
         .duration(500)
         .easing('ease-in-out')
         .fromTo('transform', 'scale(1)', 'scale(1.1)')
-        .fromTo('box-shadow', 'none', '0 10px 20px rgba(0, 0, 0, 0.2)');
+        .fromTo('box-shadow', 'none', '0 15px 30px rgba(0, 0, 255, 0.5)'); // Borde azul difuminado
       animation.play();
     }
   }
 
-  markAttendance() {
-    if (this.selectedCardIndex !== null) {
-      alert(`Asistencia marcada para ${this.cards[this.selectedCardIndex].title}`);
-    } else {
-      alert('Por favor, selecciona una asignatura.');
-    }
+  resetCardAnimation(card: any) {
+    card.classList.remove('selected'); // Eliminar la clase 'selected'
+    
+    const resetAnimation = this.animationController.create()
+      .addElement(card)
+      .duration(500)
+      .easing('ease-in-out')
+      .fromTo('transform', 'scale(1.1)', 'scale(1)')
+      .fromTo('box-shadow', '0 15px 30px rgba(0, 0, 255, 0.5)', 'none'); // Revertir borde azul difuminado
+    resetAnimation.play();
   }
 }
