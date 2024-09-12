@@ -61,8 +61,8 @@ export class PerfilPage implements OnInit {
         .addElement(selectedCard)
         .duration(500)
         .easing('ease-in-out')
-        .fromTo('transform', 'scale(1)', 'scale(1.1)')
-        .fromTo('box-shadow', 'none', '0 15px 30px rgba(0, 0, 255, 0.5)'); // Borde azul difuminado
+        .fromTo('transform', 'scale(1)', 'scale(1.05)')
+        .fromTo('box-shadow', 'none', '0 7px 15px rgba(0, 0, 255, 0.5)'); // Borde azul difuminado
       animation.play();
     }
   }
@@ -74,8 +74,8 @@ export class PerfilPage implements OnInit {
       .addElement(card)
       .duration(500)
       .easing('ease-in-out')
-      .fromTo('transform', 'scale(1.1)', 'scale(1)')
-      .fromTo('box-shadow', '0 15px 30px rgba(0, 0, 255, 0.5)', 'none'); // Revertir borde azul difuminado
+      .fromTo('transform', 'scale(1.05)', 'scale(1)')
+      .fromTo('box-shadow', '0 7px 15px rgba(0, 0, 255, 0.5)', 'none'); // Revertir borde azul difuminado
     resetAnimation.play();
   }
 }

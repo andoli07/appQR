@@ -1,3 +1,19 @@
+.profile-image {
+  width: 100px;
+  height: 100px; 
+  border-radius: 50%;
+  object-fit: cover; 
+  border: 2px solid #ccc;
+  animation: rotateYLoop 5s infinite linear;
+}
+
+.profile-image-container {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
 @keyframes fadeInSlideIn {
   0% {
     opacity: 0;
@@ -7,13 +23,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.profile-image-container {
-  perspective: 1000px; 
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
 }
 
 @keyframes rotateYLoop {
@@ -26,15 +35,6 @@
   100% {
     transform: rotateY(360deg);
   }
-}
-
-.profile-image {
-  width: 100px;
-  height: 100px; 
-  border-radius: 50%;
-  object-fit: cover; 
-  border: 2px solid #ccc; 
-  animation: rotateYLoop 5s infinite linear;
 }
 
 @keyframes scalePulse {
@@ -60,7 +60,7 @@
   }
 }
 
-ion-card {
+.animated ion-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -68,12 +68,12 @@ ion-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-ion-card.selected {
+.animated ion-card.selected {
   transform: scale(1);
   box-shadow: 0 0 10px rgb(33, 145, 251); 
 }
 
-ion-card:hover {
+.animated ion-card:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
 }

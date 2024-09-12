@@ -27,24 +27,17 @@
   </ion-header>
 
   <div>
-    <ion-card>
-      <ion-card-header>
-        <div class="profile-image-container">
-          <img src="assets/img/sakuragi.jpg" alt="Profile Image" class="profile-image" />
-        </div>
-        <ion-card-title>¡Bienvenido, {{username}}!</ion-card-title>
-      </ion-card-header>
-
-      <ion-card-content>
-        ¿En cuál asignatura deseas marcar tu asistencia?
-      </ion-card-content>
-    </ion-card>
+      <div class="profile-image-container">
+        <img src="assets/img/sakuragi.jpg" alt="Profile Image" class="profile-image" />
+      </div>
+      <h1 style="text-align: center;">¡Bienvenido, {{username}}!</h1>
+      <h6 style="text-align: center;">¿En cuál asignatura deseas marcar tu asistencia?</h6>
   </div>
 
   <ion-grid>
     <ion-row>
-      <ion-col size="6" *ngFor="let card of cards; let i = index">
-        <ion-card class="card" (click)="onCardSelect(i)">
+      <ion-col size="12" *ngFor="let card of cards; let i = index" style="margin-top: 10px;">
+        <ion-card class="card animated" (click)="onCardSelect(i)">
           <img [src]="card.imgSrc" alt="{{card.title}}" style="width: 100%; height: auto;" />
           <ion-card-header>
             <ion-card-title>{{ card.title }}</ion-card-title>
