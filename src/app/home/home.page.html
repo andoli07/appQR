@@ -1,7 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Duoc
+      <div class="profile-image-container">
+        <img src="assets/img/logo-duoc.png" alt="Profile Image" class="profile-image" />
+      </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -15,8 +17,6 @@
 
   <div id="container">
     <ion-card>
-     
-      
       <ion-card-header>
         <ion-card-subtitle>Iniciar sesión</ion-card-subtitle>
         <ion-card-title>Credenciales</ion-card-title>
@@ -29,13 +29,14 @@
             </ion-input>
           </ion-item>
           <ion-item>
-            <ion-input type="password" [(ngModel)]="user.password"  label="Contraseña" labelPlacement="floating" placeholder="Ingresar Contraseña">
+            <ion-input type="password" [(ngModel)]="user.password" label="Contraseña" labelPlacement="floating" placeholder="Ingresar Contraseña">
             </ion-input>
           </ion-item>
           <ion-item>
             <ion-toggle justify="end">Recuérdame</ion-toggle>
           </ion-item>
           <br>
+          <ion-label class="message" color="danger">{{message}}</ion-label>
           <ion-button color="primary" size="full" shape="round" (click)="validar()">Entrar</ion-button>
           <ion-button color="primary" size="full" fill="clear" shape="round" >Registrarse</ion-button>
           <ion-button color="secondary" size="full" fill="clear" shape="round" routerLink="/reset">Recuperar correo/contraseña</ion-button>

@@ -1,8 +1,155 @@
-.flex-center ion-spinner {
+/* Degradado de amarillo a azul oscuro para el fondo */
+ion-content {
+    --background: linear-gradient(to bottom, #d6af00, #ffffff, #000b3b); /* Amarillo oro en la parte superior y azul oscuro en la parte inferior */
+  }
+  
+  /* Sección del perfil */
+  .profile-section {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Cuadro de bienvenida */
+  .welcome-card {
+    background-color: #000; /* Fondo negro para el card */
+    color: #fff; /* Texto blanco para mayor contraste */
+    width: 100%;
+    max-width: 600px; /* Ancho máximo del card */
+    margin: 20px 0; /* Margen superior e inferior */
+    text-align: center; /* Centra el texto dentro del card */
+    padding: 16px; /* Padding interno del card */
+  }
+  
+  .profile-image-container {
+    perspective: 1000px; /* Proporciona la perspectiva para el efecto 3D */
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .profile-image {
+    width: 100px; /* Ajusta el tamaño según sea necesario */
+    height: 100px; /* Ajusta el tamaño según sea necesario */
+    border-radius: 50%;
+    object-fit: cover; /* Asegura que la imagen mantenga su proporción y se ajuste dentro del círculo */
+    border: 2px solid #ccc; /* Opcional: agrega un borde para resaltar la imagen */
+    animation: rotateYLoop 5s infinite linear; /* Animación de giro en bucle */
+  }
+  
+  @keyframes rotateYLoop {
+    0% {
+      transform: rotateY(0deg);
+    }
+    50% {
+      transform: rotateY(180deg);
+    }
+    100% {
+      transform: rotateY(360deg);
+    }
+  }
+  
+  /* Animaciones para las tarjetas */
+  @keyframes scalePulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  ion-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Permite que la tarjeta se expanda completamente */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para animaciones de tarjeta */
+  }
+  
+  ion-card.selected {
+    transform: scale(1); /* Restaura el tamaño original */
+    box-shadow: none;
+  }
+  
+  ion-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra al pasar el cursor */
+  }
+  
+  ion-col {
+    display: flex;
+    align-items: stretch;
+  }
+  
+  ion-grid ion-row ion-col {
+    --ion-col-index: 0;
+  }
+  
+  ion-col:nth-child(1) {
+    --ion-col-index: 1;
+  }
+  
+  ion-col:nth-child(2) {
+    --ion-col-index: 2;
+  }
+  
+  ion-col:nth-child(3) {
+    --ion-col-index: 3;
+  }
+  
+  ion-col:nth-child(4) {
+    --ion-col-index: 4;
+  }
+  
+  .subject-card {
+    animation: fadeInUp 0.10s ease-out;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  
+  .subject-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .circular-button {
+    position: fixed; /* Fija el botón en la parte inferior */
+    bottom: 20px; /* Ajusta la distancia desde el borde inferior */
+    left: 50%; /* Centra horizontalmente */
+    transform: translateX(-50%); /* Ajusta el desplazamiento para centrar */
+    width: 60px; /* Ajusta el tamaño del botón */
+    height: 60px; /* Ajusta el tamaño del botón */
+    border-radius: 50%; /* Hace el botón circular */
+    --padding-start: 0; /* Elimina el padding inicial */
+    --padding-end: 0; /* Elimina el padding final */
+    --padding-top: 0; /* Elimina el padding superior */
+    --padding-bottom: 0; /* Elimina el padding inferior */
+  }
+  
+  .circular-button ion-icon {
+    font-size: 24px;
+    color: rgb(0, 0, 0);
+  }
+  
+  .flex-center ion-spinner {
     width: 40%;
     height: 40%;
-}
-
-ion-content {
-    --background: black;
-}
+  }
+  

@@ -1,36 +1,40 @@
-<<<<<<< Updated upstream
-.profile-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-=======
-@keyframes fadeInSlideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
->>>>>>> Stashed changes
-  }
-  
-  .profile-image {
-    width: 100px; /* Ajusta el tamaño según sea necesario */
-    height: 100px; /* Ajusta el tamaño según sea necesario */
-    border-radius: 50%;
-    object-fit: cover; /* Asegura que la imagen mantenga su proporción y se ajuste dentro del círculo */
-    border: 2px solid #ccc; /* Opcional: agrega un borde para resaltar la imagen */
-  }
+/* Degradado de amarillo a azul oscuro para el fondo */
+ion-content {
+  --background: linear-gradient(to bottom, #d6af00, #ffffff, #000b3b); 
+}
 
-<<<<<<< Updated upstream
-  ion-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%; /* Permite que la tarjeta se expanda completamente */
-=======
+/* Sección del perfil */
+.profile-section {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-card {
+  background-color: #000;
+  color: #fff;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px 0;
+  text-align: center;
+  padding: 16px;
+}
+
 .profile-image-container {
-  perspective: 1000px; 
+  perspective: 1000px;
   display: flex;
   justify-content: center;
   margin: 20px 0;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  animation: rotateYLoop 5s infinite linear;
 }
 
 @keyframes rotateYLoop {
@@ -45,29 +49,13 @@
   }
 }
 
-.profile-image {
-  width: 100px;
-  height: 100px; 
-  border-radius: 50%;
-  object-fit: cover; 
-  border: 2px solid #ccc; 
-  animation: rotateYLoop 5s infinite linear;
-}
-
 @keyframes scalePulse {
   0% {
     transform: scale(1);
->>>>>>> Stashed changes
   }
-  
-  ion-col {
-    display: flex;
-    align-items: stretch;
+  50% {
+    transform: scale(1.1);
   }
-<<<<<<< Updated upstream
-  
-  
-=======
   100% {
     transform: scale(1);
   }
@@ -84,7 +72,7 @@
   }
 }
 
-ion-card {
+.animated ion-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -92,32 +80,39 @@ ion-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-ion-card.selected {
+.animated ion-card.selected {
   transform: scale(1);
-  box-shadow: 0 0 10px rgb(19, 93, 252); /* Borde azul difuminado */
+  box-shadow: none;
 }
 
-ion-card:hover {
+.animated ion-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra al pasar el cursor */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 ion-col {
   display: flex;
-  justify-content: center;
-  align-items: stretch; /* Hace que todas las columnas se estiren al mismo tamaño */
+  align-items: stretch;
 }
 
-ion-grid, ion-row {
-  height: 50%; /* Asegura que el grid ocupe el 100% de la altura */
+ion-grid ion-row ion-col {
+  --ion-col-index: 0;
 }
 
-ion-card {
-  width: 100%; /* Ocupa todo el ancho disponible en la columna */
-  height: 100%; /* Ocupa todo el alto disponible en la columna */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+ion-col:nth-child(1) {
+  --ion-col-index: 1;
+}
+
+ion-col:nth-child(2) {
+  --ion-col-index: 2;
+}
+
+ion-col:nth-child(3) {
+  --ion-col-index: 3;
+}
+
+ion-col:nth-child(4) {
+  --ion-col-index: 4;
 }
 
 .subject-card {
@@ -131,4 +126,31 @@ ion-card {
   opacity: 1;
   transform: translateY(0);
 }
->>>>>>> Stashed changes
+
+.circular-button {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+.circular-button ion-icon {
+  font-size: 24px;
+  color: rgb(0, 0, 0);
+}
+
+/* Estilo para el logo de Duoc UC */
+.logo-duoc {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  width: 100px;
+  height: auto;
+}

@@ -1,12 +1,6 @@
-<<<<<<< Updated upstream
-import { Component, OnInit, ViewChild} from '@angular/core';
-=======
 import { Component, OnInit, Renderer2 } from '@angular/core';
->>>>>>> Stashed changes
 import { Router } from '@angular/router';
 import { AnimationController } from '@ionic/angular';
-import type { IonModal } from '@ionic/angular';
-
 
 @Component({
   selector: 'app-perfil',
@@ -18,24 +12,18 @@ export class PerfilPage implements OnInit {
     { title: 'Programación Móvil', content: 'Sección 003_D', imgSrc: 'assets/img/tec.webp' },
     { title: 'Programación Base de Datos', content: 'sección_008A', imgSrc: 'assets/img/tecno.png' },
     { title: 'Arquitectura', content: 'Sección_002C', imgSrc: 'assets/img/tecnologia.jpg' },
-    { title: 'Portafolio', content: 'Sección_005B', imgSrc: 'assets/img/portafolio.jpg'  }
+    { title: 'Portafolio', content: 'Sección_005B', imgSrc: 'assets/img/portafolio.jpg' }
   ];
+  selectedCardIndex: number | null = null;
   username = '';
-<<<<<<< Updated upstream
-  
-  constructor(private router: Router, private animationController: AnimationController) {
-    const navegacion = this.router.getCurrentNavigation();
-    const state = navegacion?.extras.state as {
-      username: '';
-      password: '';
-    };
-    this.username = state.username;
-  }
-
-  ngOnInit() {}
-=======
 
   constructor(private router: Router, private animationController: AnimationController, private renderer: Renderer2) {}
+
+  reloadPageGoHome() {
+    this.router.navigate(['/home']).then(() => {
+      window.location.href = '/home';
+  });
+  }
 
   ngOnInit() {
     const navegacion = this.router.getCurrentNavigation();
@@ -67,23 +55,33 @@ export class PerfilPage implements OnInit {
     this.selectedCardIndex = index;
 
     const selectedCard = document.querySelectorAll('.card')[index];
-    if (selectedCard) {
-      if (previouslySelectedCard) {
-        this.resetCardAnimation(previouslySelectedCard);
-      }
 
-      
+    if (previouslySelectedCard === selectedCard) {
+      this.resetCardAnimation(previouslySelectedCard);
+      this.selectedCardIndex = null;
+      previouslySelectedCard.classList.remove('selected');
+      return;
+    }
+
+    if (previouslySelectedCard) {
+      this.resetCardAnimation(previouslySelectedCard);
+      this.selectedCardIndex = null;
+      previouslySelectedCard.classList.remove('selected');
+      }
+  
+    if (selectedCard) {
+      this.selectedCardIndex = index;
       selectedCard.classList.add('selected');
       
       const animation = this.animationController.create()
         .addElement(selectedCard)
         .duration(500)
         .easing('ease-in-out')
-        .fromTo('transform', 'scale(1)', 'scale(1.1)')
-        .fromTo('box-shadow', 'none', '0 15px 30px rgba(0, 0, 255, 0.5)');
+        .fromTo('transform', 'scale(1)', 'scale(1.05)')
+        .fromTo('box-shadow', 'none', '0 7px 15px rgba(0, 0, 255, 0.5)');
       animation.play();
+      }
     }
-  }
 
   resetCardAnimation(card: any) {
     card.classList.remove('selected');
@@ -92,10 +90,8 @@ export class PerfilPage implements OnInit {
       .addElement(card)
       .duration(500)
       .easing('ease-in-out')
-      .fromTo('transform', 'scale(1.1)', 'scale(1)')
-      .fromTo('box-shadow', '0 15px 30px rgba(0, 0, 255, 0.5)', 'none'); 
+      .fromTo('transform', 'scale(1.05)', 'scale(1)')
+      .fromTo('box-shadow', '0 7px 15px rgba(0, 0, 255, 0.5)', 'none');
     resetAnimation.play();
   }
->>>>>>> Stashed changes
 }
-
