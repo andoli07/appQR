@@ -11,31 +11,30 @@ ion-content {
   align-items: center;
 }
 
-/* Cuadro de bienvenida */
 .welcome-card {
-  background-color: #000; /* Fondo negro para el card */
-  color: #fff; /* Texto blanco para mayor contraste */
+  background-color: #000;
+  color: #fff;
   width: 100%;
-  max-width: 600px; /* Ancho máximo del card */
-  margin: 20px 0; /* Margen superior e inferior */
-  text-align: center; /* Centra el texto dentro del card */
-  padding: 16px; /* Padding interno del card */
+  max-width: 600px;
+  margin: 20px 0;
+  text-align: center;
+  padding: 16px;
 }
 
 .profile-image-container {
-  perspective: 1000px; /* Proporciona la perspectiva para el efecto 3D */
+  perspective: 1000px;
   display: flex;
   justify-content: center;
   margin: 20px 0;
 }
 
 .profile-image {
-  width: 100px; /* Ajusta el tamaño según sea necesario */
-  height: 100px; /* Ajusta el tamaño según sea necesario */
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  object-fit: cover; /* Asegura que la imagen mantenga su proporción y se ajuste dentro del círculo */
-  border: 2px solid #ccc; /* Opcional: agrega un borde para resaltar la imagen */
-  animation: rotateYLoop 5s infinite linear; /* Animación de giro en bucle */
+  object-fit: cover;
+  border: 2px solid #ccc;
+  animation: rotateYLoop 5s infinite linear;
 }
 
 @keyframes rotateYLoop {
@@ -50,7 +49,6 @@ ion-content {
   }
 }
 
-/* Animaciones para las tarjetas */
 @keyframes scalePulse {
   0% {
     transform: scale(1);
@@ -74,22 +72,22 @@ ion-content {
   }
 }
 
-ion-card {
+.animated ion-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%; /* Permite que la tarjeta se expanda completamente */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para animaciones de tarjeta */
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-ion-card.selected {
-  transform: scale(1); /* Restaura el tamaño original */
+.animated ion-card.selected {
+  transform: scale(1);
   box-shadow: none;
 }
 
-ion-card:hover {
+.animated ion-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra al pasar el cursor */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 ion-col {
@@ -130,17 +128,17 @@ ion-col:nth-child(4) {
 }
 
 .circular-button {
-  position: fixed; /* Fija el botón en la parte inferior */
-  bottom: 20px; /* Ajusta la distancia desde el borde inferior */
-  left: 50%; /* Centra horizontalmente */
-  transform: translateX(-50%); /* Ajusta el desplazamiento para centrar */
-  width: 60px; /* Ajusta el tamaño del botón */
-  height: 60px; /* Ajusta el tamaño del botón */
-  border-radius: 50%; /* Hace el botón circular */
-  --padding-start: 0; /* Elimina el padding inicial */
-  --padding-end: 0; /* Elimina el padding final */
-  --padding-top: 0; /* Elimina el padding superior */
-  --padding-bottom: 0; /* Elimina el padding inferior */
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
 }
 
 .circular-button ion-icon {
@@ -153,6 +151,6 @@ ion-col:nth-child(4) {
   position: absolute;
   top: 10px;
   right: 16px;
-  width: 100px; /* Ajusta el tamaño según sea necesario */
+  width: 100px;
   height: auto;
 }

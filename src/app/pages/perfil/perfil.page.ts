@@ -19,6 +19,12 @@ export class PerfilPage implements OnInit {
 
   constructor(private router: Router, private animationController: AnimationController, private renderer: Renderer2) {}
 
+  reloadPageGoHome() {
+    this.router.navigate(['/home']).then(() => {
+      window.location.href = '/home';
+  });
+  }
+
   ngOnInit() {
     const navegacion = this.router.getCurrentNavigation();
     const state = navegacion?.extras.state as { username: string };
@@ -49,12 +55,22 @@ export class PerfilPage implements OnInit {
     this.selectedCardIndex = index;
 
     const selectedCard = document.querySelectorAll('.card')[index];
-    if (selectedCard) {
-      if (previouslySelectedCard) {
-        this.resetCardAnimation(previouslySelectedCard);
-      }
 
-      // Aplicar borde azul difuminado a la tarjeta seleccionada
+    if (previouslySelectedCard === selectedCard) {
+      this.resetCardAnimation(previouslySelectedCard);
+      this.selectedCardIndex = null;
+      previouslySelectedCard.classList.remove('selected');
+      return;
+    }
+
+    if (previouslySelectedCard) {
+      this.resetCardAnimation(previouslySelectedCard);
+      this.selectedCardIndex = null;
+      previouslySelectedCard.classList.remove('selected');
+      }
+  
+    if (selectedCard) {
+      this.selectedCardIndex = index;
       selectedCard.classList.add('selected');
       
       const animation = this.animationController.create()
@@ -62,20 +78,20 @@ export class PerfilPage implements OnInit {
         .duration(500)
         .easing('ease-in-out')
         .fromTo('transform', 'scale(1)', 'scale(1.05)')
-        .fromTo('box-shadow', 'none', '0 7px 15px rgba(0, 0, 255, 0.5)'); // Borde azul difuminado
+        .fromTo('box-shadow', 'none', '0 7px 15px rgba(0, 0, 255, 0.5)');
       animation.play();
+      }
     }
-  }
 
   resetCardAnimation(card: any) {
-    card.classList.remove('selected'); // Eliminar la clase 'selected'
+    card.classList.remove('selected');
     
     const resetAnimation = this.animationController.create()
       .addElement(card)
       .duration(500)
       .easing('ease-in-out')
       .fromTo('transform', 'scale(1.05)', 'scale(1)')
-      .fromTo('box-shadow', '0 7px 15px rgba(0, 0, 255, 0.5)', 'none'); // Revertir borde azul difuminado
+      .fromTo('box-shadow', '0 7px 15px rgba(0, 0, 255, 0.5)', 'none');
     resetAnimation.play();
   }
 }

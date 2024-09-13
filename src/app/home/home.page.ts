@@ -13,32 +13,40 @@ export class HomePage {
     password: '',
   };
 
+  message = '';
+
   constructor(private router: Router) {
 
   }
 
   validar() {
-    if (this.user.username.length != 0) {
-      if (this.user.password.length != 0) {
-        //Funciona
-        let navigationExtras: NavigationExtras = {
-          state: {
-            username: this.user.username,
-            password: this.user.password,
-          },
-        };
-        this.router.navigate(['/loader'],navigationExtras);
+    if (this.user.username == 'test' && this.user.password == 'test') {
+      let navigationExtras: NavigationExtras = {
+        state: {
+          username: 'test',
+          password: 'test',
+        },
+      };
+      this.router.navigate(['/loader'],navigationExtras);
         setTimeout(() => {
           this.router.navigate(['/perfil'],navigationExtras);
         }, 3000);
-      } else {
-        console.log('Contraseña vacia');
-        //No funciona
-      }
     } else {
-      console.log('Usuario vacio');
-      //Tampoco funciona
+      if (this.user.username.length != 0) {
+        if (this.user.password.length != 0) {
+          //Funciona pero q no pase
+          console.log('Usuario no existe');
+          this.message = 'Usuario no existe';
+        } else {
+          console.log('Contraseña vacia');
+          this.message = 'Contraseña vacia';
+          //No funciona
+        }
+      } else {
+        //No funciona
+        console.log('Usuario vacio');
+        this.message = 'Usuario Vacio';
+      }
     }
   }
-
 }
