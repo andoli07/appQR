@@ -1,12 +1,13 @@
 <ion-menu content-id="main-content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu Content</ion-title>
+      <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
+
   <ion-content class="ion-padding">
-    <ion-button expand="block">Ver asistencia</ion-button> 
-    <ion-button expand="block" routerLink="/home">Cerrar sesion</ion-button>
+    <ion-button expand="block">Ver asistencia</ion-button>
+    <ion-button expand="block" routerLink="/home">Cerrar sesión</ion-button>
   </ion-content>
 </ion-menu>
 
@@ -16,6 +17,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Menu</ion-title>
+    <img src="assets/img/logo-duoc.png" alt="Duoc UC Logo" class="logo-duoc"/>
   </ion-toolbar>
 </ion-header>
 
@@ -27,11 +29,18 @@
   </ion-header>
 
   <div>
-      <div class="profile-image-container">
-        <img src="assets/img/sakuragi.jpg" alt="Profile Image" class="profile-image" />
-      </div>
-      <h1 style="text-align: center;">¡Bienvenido, {{username}}!</h1>
-      <h6 style="text-align: center;">¿En cuál asignatura deseas marcar tu asistencia?</h6>
+    <ion-card>
+      <ion-card-header>
+        <div class="profile-image-container">
+          <img src="assets/img/sakuragi.jpg" alt="Profile Image" class="profile-image" />
+        </div>
+        <ion-card-title>¡Bienvenido, {{username}}!</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        ¿En cuál asignatura deseas marcar tu asistencia?
+      </ion-card-content>
+    </ion-card>
   </div>
 
   <ion-grid>
@@ -50,10 +59,7 @@
     </ion-row>
   </ion-grid>
 
-  
   <ion-button class="circular-button" fill="solid" shape="round" color="warning">
     <ion-icon name="qr-code-outline"></ion-icon>
   </ion-button>
-  
- 
 </ion-content>

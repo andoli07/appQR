@@ -1,28 +1,41 @@
-.profile-image {
-  width: 100px;
-  height: 100px; 
-  border-radius: 50%;
-  object-fit: cover; 
-  border: 2px solid #ccc;
-  animation: rotateYLoop 5s infinite linear;
+/* Degradado de amarillo a azul oscuro para el fondo */
+ion-content {
+  --background: linear-gradient(to bottom, #d6af00, #ffffff, #000b3b); 
+}
+
+/* Sección del perfil */
+.profile-section {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Cuadro de bienvenida */
+.welcome-card {
+  background-color: #000; /* Fondo negro para el card */
+  color: #fff; /* Texto blanco para mayor contraste */
+  width: 100%;
+  max-width: 600px; /* Ancho máximo del card */
+  margin: 20px 0; /* Margen superior e inferior */
+  text-align: center; /* Centra el texto dentro del card */
+  padding: 16px; /* Padding interno del card */
 }
 
 .profile-image-container {
-  perspective: 1000px;
+  perspective: 1000px; /* Proporciona la perspectiva para el efecto 3D */
   display: flex;
   justify-content: center;
   margin: 20px 0;
 }
 
-@keyframes fadeInSlideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.profile-image {
+  width: 100px; /* Ajusta el tamaño según sea necesario */
+  height: 100px; /* Ajusta el tamaño según sea necesario */
+  border-radius: 50%;
+  object-fit: cover; /* Asegura que la imagen mantenga su proporción y se ajuste dentro del círculo */
+  border: 2px solid #ccc; /* Opcional: agrega un borde para resaltar la imagen */
+  animation: rotateYLoop 5s infinite linear; /* Animación de giro en bucle */
 }
 
 @keyframes rotateYLoop {
@@ -37,6 +50,7 @@
   }
 }
 
+/* Animaciones para las tarjetas */
 @keyframes scalePulse {
   0% {
     transform: scale(1);
@@ -60,40 +74,47 @@
   }
 }
 
-.animated ion-card {
+ion-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%; /* Permite que la tarjeta se expanda completamente */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para animaciones de tarjeta */
 }
 
-.animated ion-card.selected {
-  transform: scale(1);
-  box-shadow: 0 0 10px rgb(33, 145, 251); 
+ion-card.selected {
+  transform: scale(1); /* Restaura el tamaño original */
+  box-shadow: none;
 }
 
-.animated ion-card:hover {
+ion-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra al pasar el cursor */
 }
 
 ion-col {
   display: flex;
-  justify-content: center;
-  align-items: stretch; 
+  align-items: stretch;
 }
 
-ion-grid, ion-row {
-  height: 50%; 
+ion-grid ion-row ion-col {
+  --ion-col-index: 0;
 }
 
-ion-card {
-  width: 100%; 
-  height: 100%; 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+ion-col:nth-child(1) {
+  --ion-col-index: 1;
+}
+
+ion-col:nth-child(2) {
+  --ion-col-index: 2;
+}
+
+ion-col:nth-child(3) {
+  --ion-col-index: 3;
+}
+
+ion-col:nth-child(4) {
+  --ion-col-index: 4;
 }
 
 .subject-card {
@@ -123,6 +144,15 @@ ion-card {
 }
 
 .circular-button ion-icon {
-  font-size: 24px; 
-  color: rgb(0, 0, 0); 
+  font-size: 24px;
+  color: rgb(0, 0, 0);
+}
+
+/* Estilo para el logo de Duoc UC */
+.logo-duoc {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  width: 100px; /* Ajusta el tamaño según sea necesario */
+  height: auto;
 }
