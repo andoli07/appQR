@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationExtras } from '@angular/router';
+import { AuthenticatorService } from '../services/authenticator.service';
 
 @Component({
   selector: 'app-home',
@@ -15,16 +16,14 @@ export class HomePage {
 
   message = '';
 
-  constructor(private router: Router) {
-
-  }
+  constructor(private router: Router, private auth: AuthenticatorService) {}
 
   validar() {
-    if (this.user.username == 'test' && this.user.password == 'test') {
+    if (this.auth.loginBDD(this.user.username, this.user.password)) {
       let navigationExtras: NavigationExtras = {
         state: {
-          username: 'test',
-          password: 'test',
+          username: this.user.username,
+          password: this.user.password,
         },
       };
       this.router.navigate(['/loader'],navigationExtras);
@@ -32,21 +31,9 @@ export class HomePage {
           this.router.navigate(['/perfil'],navigationExtras);
         }, 3000);
     } else {
-      if (this.user.username.length != 0) {
-        if (this.user.password.length != 0) {
-          //Funciona pero q no pase
-          console.log('Usuario no existe');
-          this.message = 'Usuario no existe';
-        } else {
-          console.log('Contraseña vacia');
-          this.message = 'Contraseña vacia';
-          //No funciona
-        }
-      } else {
-        //No funciona
-        console.log('Usuario vacio');
-        this.message = 'Usuario Vacio';
-      }
+      console.log('al else');
+      //No funciona
     }
   }
 }
+

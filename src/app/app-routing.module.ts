@@ -22,8 +22,18 @@ const routes: Routes = [
   },
   {
     path: 'perfil',
-    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
+    loadChildren: () => import('./access/perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+  {
+    path: 'error',
+    loadChildren: () => import('./error/error/error.module').then( m => m.ErrorPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./access/register/register.module').then( m => m.RegisterPageModule)
+  },
+
+
 ];
 
 @NgModule({
