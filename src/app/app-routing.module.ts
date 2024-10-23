@@ -31,7 +31,11 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./access/register/register.module').then( m => m.RegisterPageModule)
+  },  {
+    path: 'controller',
+    loadChildren: () => import('./admin/controller/controller.module').then( m => m.ControllerPageModule)
   },
+
 
 
 ];
