@@ -7,20 +7,24 @@ import { Observable } from 'rxjs';
 })
 export class ApicontrollerService {
 
-  apiURL = "http://127.0.0.1:8000/api"
+  apiURL = "http://127.0.0.1:8000/api";
 
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<any> {
-    return this.http.get(this.apiURL + "/accounts");
+    return this.http.get(`${this.apiURL}/accounts`);
   }
+
   postUser(data: any): Observable<any> {
-    return this.http.post(this.apiURL + "/accounts", data);
+    return this.http.post(`${this.apiURL}/accounts`, data);
   }
-  updateUser(id: string, data: any): Observable<any> {
-    return this.http.put(this.apiURL + "/users/" + id, data);
+
+  updateUser(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiURL}/accounts/${id}/`, data);  // URL correcta para actualizar un usuario
   }
-  deleteUser(id: string): Observable<any> {
-    return this.http.delete(this.apiURL + "/users/" + id);
+  
+
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete(`${this.apiURL}/accounts/${id}/`);  // Actualizamos la URL
   }
 }
