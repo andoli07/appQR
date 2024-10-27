@@ -20,11 +20,18 @@ export class ApicontrollerService {
   }
 
   updateUser(id: number, data: any): Observable<any> {
-    return this.http.put(`${this.apiURL}/accounts/${id}/`, data);  // URL correcta para actualizar un usuario
+    return this.http.put(`${this.apiURL}/accounts/${id}/`, data);
   }
   
-
   deleteUser(id: number): Observable<any> {
-    return this.http.delete(`${this.apiURL}/accounts/${id}/`);  // Actualizamos la URL
+    return this.http.delete(`${this.apiURL}/accounts/${id}/`);
+  }
+
+  login(data: any): Observable<any> {
+    return this.http.post(`${this.apiURL}/accounts/login`, data);
+  }
+
+  register(data: any): Observable<any> {
+    return this.http.post(`${this.apiURL}/accounts/register`, data);
   }
 }

@@ -32,6 +32,7 @@
               placeholder="Ingrese su contraseña">
             </ion-input>
           </ion-item><br>
+          <ion-label class="message" [color]="color">{{message}}</ion-label><br>
           <ion-button fill="outline" (click)="registrarse()">Registrarse</ion-button><br>
           <ion-button fill="outline" [routerLink]="['/home']">Volver</ion-button>
         </ion-list>

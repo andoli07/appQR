@@ -8,21 +8,21 @@ ion-content {
   }
   
   #agregar {
-    --background: #2986f8; /* Azul oscuro para el fondo del botón */
-    --color: #ffffff;      /* Texto en blanco para contraste */
-    --border-radius: 12px; /* Bordes redondeados */
-    width: 80%;            /* Ajustar para que no ocupe todo el ancho */
-    margin: 16px auto;     /* Centrar el botón horizontalmente */
-    --padding: 12px 24px;  /* Ajuste de padding para un aspecto más consistente */
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para efecto de elevación */
+    --background: #2986f8;  
+    --color: #ffffff;       
+    --border-radius: 12px; 
+    width: 80%;             
+    margin: 16px auto;      
+    --padding: 12px 24px;   
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
 
   ion-button.borrar {
-    --border-color: #ff0000;  /* Borde rojo */
-    --color: #ff0000;         /* Texto rojo */
-    --border-radius: 8px;     /* Bordes redondeados */
-    --padding: 10px 20px;     /* Ajustar padding */
-    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    --border-color: #ff0000;  
+    --color: #ff0000;       
+    --border-radius: 8px;    
+    --padding: 10px 20px;   
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
   
   #container {
@@ -31,7 +31,7 @@ ion-content {
     justify-content: center;
     align-items: center;
     padding: 5px;
-    margin-top: 120px;  /* Ajustar el espacio superior */
+    margin-top: 120px; 
   }
   
   .user-grid {
@@ -42,45 +42,43 @@ ion-content {
   }
   
   ion-content {
-    --padding-top: 100px;  /* Ajusta este valor si es necesario */
-    overflow-y: scroll;    /* Asegura que haya scroll vertical */
+    --padding-top: 100px; 
+    overflow-y: scroll;   
   }
   ion-header {
     position: sticky;
     top: 0;
-    z-index: 10;  /* Asegura que esté sobre las tarjetas */
+    z-index: 10; 
   }
   
   ion-toolbar {
     position: relative;
-    z-index: 10;  /* Asegura que no sea cubierto por las tarjetas */
+    z-index: 10; 
   }
   .user-grid {
-    margin-top: 120px;  /* Ajustar más espacio arriba */
+    margin-top: 120px; 
   }
 
   ion-content {
-    --padding-top: 0px; /* Ajuste del padding para que el contenido no cubra el encabezado */
+    --padding-top: 0px; 
   }
   
   ion-toolbar {
-    background: #000b3b; /* Fondo azul oscuro */
+    background: #000b3b;
   }
   
   ion-title {
-    --color: #000000;     /* Texto blanco */
-    background: rgb(255, 255, 255);
+    --color: white;     
     font-size: 24px;
     font-weight: bold;
     text-align: center;
-    text-shadow: 2px 2px 5px rgb(255, 255, 255);  /* Sombra para destacar el texto */
   }
   
   ion-toolbar::after {
     content: '';
     display: block;
     height: 4px;
-    background: linear-gradient(to right, #d6af00, #ffffff, #000b3b); /* Subrayado con gradiente */
+    background: linear-gradient(to right, #d6af00, #ffffff, #000b3b); 
     margin-top: 8px;
     border-radius: 4px;
   }
