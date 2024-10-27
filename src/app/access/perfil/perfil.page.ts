@@ -15,7 +15,7 @@ export class PerfilPage implements OnInit {
     { title: 'Portafolio', content: 'Sección_005B', imgSrc: 'assets/img/portafolio.jpg' }
   ];
   selectedCardIndex: number | null = null;
-  username = '';
+  username: string = '';
 
   constructor(private router: Router, private animationController: AnimationController, private renderer: Renderer2) {}
 
@@ -26,9 +26,15 @@ export class PerfilPage implements OnInit {
   }
 
   ngOnInit() {
-    const navegacion = this.router.getCurrentNavigation();
-    const state = navegacion?.extras.state as { username: string };
-    this.username = state?.username || 'Alumno';
+     //get userInfo from home
+    const navigation = this.router.getCurrentNavigation();
+     //display Username
+    if (navigation?.extras.state) {
+      const userInfo = navigation.extras.state['userInfo'];
+      console.log("UserInfo received:", userInfo);
+      this.username = userInfo?.username ?? '';
+    }
+    
 
     const profileImage = document.querySelector('.profile-image');
     if (profileImage) {

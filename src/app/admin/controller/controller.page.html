@@ -1,0 +1,33 @@
+<ion-header >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+    <ion-title>Panel de Control</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="false">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      
+      <ion-title size="large">Panel de Control</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <div id="container">
+    <div class="user-grid">
+      <ion-card *ngFor="let user of users; let i = index" class="user-card">
+        <ion-card-content>
+          <ion-card-title><strong>Username:</strong> {{ user.username }} <br /></ion-card-title>
+          <strong>Password:</strong> {{ user.password }}<br />
+          <strong>Email:</strong> {{ user.email }}<br />
+          <ion-button expand="full" fill="outline" size="small" shape="round" (click)="editUser(i)">Edit</ion-button>
+          <ion-button class="borrar" expand="full" fill="outline" size="small" shape="round" (click)="deleteUser(i)">Delete</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    
+    <ion-button id='agregar' expand="full" fill="outline" size="large" shape="round" (click)="addUser()">Agregar Usuario</ion-button>
+  </div>
+</ion-content>
