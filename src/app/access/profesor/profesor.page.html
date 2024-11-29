@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Bienvenido Profesor {{username}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="profile-section">
+    <ion-card class="welcome-card">
+      <ion-card-header>
+        <ion-card-title>¡Bienvenido Profesor, {{username}}!</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Aquí puedes generar un código QR para tus clases.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button class="generate-qr-button" expand="block" color="tertiary" (click)="generateQR()">
+      Generar Código QR
+    </ion-button>
+
+    <!-- Modal QR -->
+    <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Código QR</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <qrcode [qrdata]="qrCodeValue"  class="custom-qr"></qrcode>
+      </ion-content>
+    </ion-modal>
+  </div>
+</ion-content>

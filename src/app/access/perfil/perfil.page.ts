@@ -1,6 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimationController } from '@ionic/angular';
+import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+
 
 @Component({
   selector: 'app-perfil',
@@ -100,4 +102,20 @@ export class PerfilPage implements OnInit {
       .fromTo('box-shadow', '0 7px 15px rgba(0, 0, 255, 0.5)', 'none');
     resetAnimation.play();
   }
+
+  async scanQR() {
+    try {
+      const result = await BarcodeScanner.scan();
+      if (result.barcodes.length > 0) {
+        alert('Contenido del QR: ' + result.barcodes[0].displayValue);
+        console.log('Contenido del QR:', result.barcodes[0].displayValue);
+      } else {
+        alert('No se detectó ningún código QR.');
+      }
+    } catch (error) {
+      console.error('Error al escanear el código QR:', error);
+      alert('Hubo un error al intentar escanear el código QR.');
+    }
+  }
+  
 }

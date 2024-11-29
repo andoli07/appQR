@@ -1,0 +1,42 @@
+/* Fondo con degradado */
+ion-content {
+    --background: linear-gradient(to bottom, #d6af00, #ffffff, #000b3b);
+  }
+  
+  /* Estilo del contenedor de bienvenida */
+  .profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    height: 100%;
+  }
+  
+  /* Estilo de la tarjeta de bienvenida */
+  .welcome-card {
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    padding: 16px;
+    border-radius: 12px;
+  }
+  
+  /* Botón para generar QR */
+  .generate-qr-button {
+    margin-top: 20px;
+    width: 80%;
+    max-width: 300px;
+    height: 50px;
+    font-size: 16px;
+    border-radius: 25px;
+  }
+  
+  .custom-qr {
+    display: block;
+    margin: 20px auto;
+    width: 256px; /* Ajusta el tamaño aquí */
+    height: 256px;
+  }

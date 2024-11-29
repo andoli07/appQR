@@ -17,7 +17,7 @@ export class HomePage {
 
   message = '';
 
-  constructor(private router: Router, private api: ApicontrollerService,private authService: AuthService) {}
+  constructor(private router: Router, private api: ApicontrollerService, private authService: AuthService) {}
 
   validar() {
     this.api.login(this.user).subscribe(
@@ -33,12 +33,20 @@ export class HomePage {
             userInfo: userInfo
           }
         };
+
         this.authService.login();
-        this.router.navigate(['/loader'],navigationExtras);
         this.message = '';
-        setTimeout(() => {
-          this.router.navigate(['/perfil'],navigationExtras);
-        }, 3000);
+
+        if (this.user.username.toLowerCase() === 'profesor') {
+          // Redirigir a la vista del profesor
+          this.router.navigate(['/profesor'], navigationExtras);
+        } else {
+          // Redirigir a la vista del alumno
+          this.router.navigate(['/loader'], navigationExtras);
+          setTimeout(() => {
+            this.router.navigate(['/perfil'], navigationExtras);
+          }, 3000);
+        }
       },
       error => {
         if (error.status === 404) {
@@ -53,4 +61,5 @@ export class HomePage {
       });
   }
 }
+
 
