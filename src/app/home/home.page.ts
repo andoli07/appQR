@@ -45,7 +45,7 @@ export class HomePage {
           this.router.navigate(['/loader'], navigationExtras);
           setTimeout(() => {
             this.router.navigate(['/perfil'], navigationExtras);
-          }, 3000);
+          }, 1000);
         }
       },
       error => {
