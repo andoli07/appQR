@@ -9,7 +9,6 @@
     <ion-button expand="block">Ver asistencia</ion-button>
     <ion-button expand="block" (click)="reloadPageGoHome()">Cerrar sesión</ion-button>
     <ion-button expand="block" routerLink="/controller">Admin Panel</ion-button>
-    
   </ion-content>
 </ion-menu>
 
@@ -44,7 +43,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" *ngFor="let card of cards; let i = index" style="margin-top: 10px;">
-        <ion-card class="card animated" (click)="onCardSelect(i)">
+        <ion-card class="card animated" (click)="onCardSelect(card)">
           <img [src]="card.imgSrc" alt="{{card.title}}" style="width: 100%; height: auto;" />
           <ion-card-header>
             <ion-card-title>{{ card.title }}</ion-card-title>
@@ -60,4 +59,32 @@
   <ion-button class="circular-button" fill="solid" shape="round" color="warning" (click)="scanQR()">
     <ion-icon name="qr-code-outline"></ion-icon>
   </ion-button>
+
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Asistencia de {{ selectedSubject?.title }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeModal()">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <div *ngIf="asistencia.length > 0; else noAsistencia">
+        <ion-list>
+          <ion-item *ngFor="let registro of asistencia">
+            <ion-label>
+              Fecha: {{ registro.fecha }}<br />
+              Asistencia: {{ registro.contador }}<br />
+              Asignatura: {{ selectedSubject?.title }}
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+      <ng-template #noAsistencia>
+        <ion-label>No hay registros de asistencia para esta asignatura.</ion-label>
+      </ng-template>
+    </ion-content>
+  </ion-modal>
+  
 </ion-content>

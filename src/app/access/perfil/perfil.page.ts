@@ -1,8 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { AnimationController } from '@ionic/angular';
+import { AnimationController, ModalController } from '@ionic/angular';
 import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
-
+import { ApicontrollerService } from 'src/app/services/apicontroller.service';
 
 @Component({
   selector: 'app-perfil',
@@ -11,40 +11,43 @@ import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 })
 export class PerfilPage implements OnInit {
   cards = [
-    { title: 'Programación Móvil', content: 'Sección 003_D', imgSrc: 'assets/img/tec.webp' },
-    { title: 'Programación Base de Datos', content: 'sección_008A', imgSrc: 'assets/img/tecno.png' },
-    { title: 'Arquitectura', content: 'Sección_002C', imgSrc: 'assets/img/tecnologia.jpg' },
-    { title: 'Portafolio', content: 'Sección_005B', imgSrc: 'assets/img/portafolio.jpg' }
+    { id: 1, title: 'Programación Móvil', content: 'Sección 003_D', imgSrc: 'assets/img/tec.webp' },
+    { id: 2, title: 'Programación Base de Datos', content: 'Sección_008A', imgSrc: 'assets/img/tecno.png' },
+    { id: 3, title: 'Arquitectura', content: 'Sección_002C', imgSrc: 'assets/img/tecnologia.jpg' },
+    { id: 4, title: 'Portafolio', content: 'Sección_005B', imgSrc: 'assets/img/portafolio.jpg' },
   ];
-  selectedCardIndex: number | null = null;
+  selectedSubject: any = null;
+  asistencia: any[] = [];
+  isModalOpen = false;
   username: string = '';
 
-  constructor(private router: Router, private animationController: AnimationController, private renderer: Renderer2) {}
+  constructor(
+    private router: Router,
+    private animationController: AnimationController,
+    private renderer: Renderer2,
+    private api: ApicontrollerService
+  ) {}
 
   reloadPageGoHome() {
     this.router.navigate(['/home']).then(() => {
       window.location.href = '/home';
-  });
+    });
   }
 
   ngOnInit() {
-     //get userInfo from home
     const navigation = this.router.getCurrentNavigation();
-     //display Username
     if (navigation?.extras.state) {
       const userInfo = navigation.extras.state['userInfo'];
-      console.log("UserInfo received:", userInfo);
       this.username = userInfo?.username ?? '';
     }
-    
 
     const profileImage = document.querySelector('.profile-image');
     if (profileImage) {
-      this.loopProfileAnimation(profileImage);
+      this.loopProfileAnimation(profileImage as HTMLElement);
     }
   }
 
-  loopProfileAnimation(element: any) {
+  loopProfileAnimation(element: HTMLElement) {
     const rotateAnimation = this.animationController.create()
       .addElement(element)
       .duration(2000)
@@ -55,52 +58,23 @@ export class PerfilPage implements OnInit {
     rotateAnimation.play();
   }
 
-  onCardSelect(index: number) {
-    const previouslySelectedCard = this.selectedCardIndex !== null 
-      ? document.querySelectorAll('.card')[this.selectedCardIndex] 
-      : null;
+  async onCardSelect(card: any) {
+    this.selectedSubject = card;
 
-    this.selectedCardIndex = index;
-
-    const selectedCard = document.querySelectorAll('.card')[index];
-
-    if (previouslySelectedCard === selectedCard) {
-      this.resetCardAnimation(previouslySelectedCard);
-      this.selectedCardIndex = null;
-      previouslySelectedCard.classList.remove('selected');
-      return;
+    try {
+      const response = await this.api.getAsistencia(card.id).toPromise();
+      this.asistencia = response;
+      this.isModalOpen = true;
+    } catch (error) {
+      console.error('Error al obtener la asistencia:', error);
+      alert('Hubo un problema al obtener la asistencia.');
     }
+  }
 
-    if (previouslySelectedCard) {
-      this.resetCardAnimation(previouslySelectedCard);
-      this.selectedCardIndex = null;
-      previouslySelectedCard.classList.remove('selected');
-      }
-  
-    if (selectedCard) {
-      this.selectedCardIndex = index;
-      selectedCard.classList.add('selected');
-      
-      const animation = this.animationController.create()
-        .addElement(selectedCard)
-        .duration(500)
-        .easing('ease-in-out')
-        .fromTo('transform', 'scale(1)', 'scale(1.05)')
-        .fromTo('box-shadow', 'none', '0 7px 15px rgba(0, 0, 255, 0.5)');
-      animation.play();
-      }
-    }
-
-  resetCardAnimation(card: any) {
-    card.classList.remove('selected');
-    
-    const resetAnimation = this.animationController.create()
-      .addElement(card)
-      .duration(500)
-      .easing('ease-in-out')
-      .fromTo('transform', 'scale(1.05)', 'scale(1)')
-      .fromTo('box-shadow', '0 7px 15px rgba(0, 0, 255, 0.5)', 'none');
-    resetAnimation.play();
+  closeModal() {
+    this.isModalOpen = false;
+    this.selectedSubject = null;
+    this.asistencia = [];
   }
 
   async scanQR() {
@@ -117,5 +91,4 @@ export class PerfilPage implements OnInit {
       alert('Hubo un error al intentar escanear el código QR.');
     }
   }
-  
 }

@@ -34,4 +34,14 @@ export class ApicontrollerService {
   register(data: any): Observable<any> {
     return this.http.post(`${this.apiURL}/accounts/register`, data);
   }
+
+  // método para obtener asistencia de una asignatura
+  getAsistencia(asignaturaId: number): Observable<any> {
+    return this.http.get(`${this.apiURL}/asistencias/${asignaturaId}/`);
+  }
+
+  getAsistenciaPorAsignatura(asignaturaId: number): Observable<any> {
+  return this.http.get(`${this.apiURL}/asistencias/${asignaturaId}/`);
+}
+
 }
