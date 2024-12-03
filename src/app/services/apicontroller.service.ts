@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -35,13 +35,34 @@ export class ApicontrollerService {
     return this.http.post(`${this.apiURL}/accounts/register`, data);
   }
 
-  // método para obtener asistencia de una asignatura
-  getAsistencia(asignaturaId: number): Observable<any> {
-    return this.http.get(`${this.apiURL}/asistencias/${asignaturaId}/`);
+  getAsignaturas(): Observable<any> {
+    return this.http.get(`${this.apiURL}/accounts/asignaturas`);
   }
 
   getAsistenciaPorAsignatura(asignaturaId: number): Observable<any> {
-  return this.http.get(`${this.apiURL}/asistencias/${asignaturaId}/`);
-}
+    return this.http.get(`${this.apiURL}/accounts/asistencia/${asignaturaId}/`);
+  }
 
+  getAsignaturasPorUsuario(usuarioId: number): Observable<any> {
+    return this.http.get(`${this.apiURL}/accounts/asignaturas/usuario/${usuarioId}/`, {});
+  }
+
+  incrementarAsistencia(asignaturaId: number, usuarioId: number): Observable<any> {
+    return this.http.post(`${this.apiURL}/accounts/asistencia/incrementar/${asignaturaId}/${usuarioId}/`, {});
+  }
+
+  getProfile(token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+    return this.http.get(`${this.apiURL}/accounts/profile`, { headers });
+  }
+
+  crearAsignatura(data: any): Observable<any> {
+    return this.http.post(`${this.apiURL}/accounts/asignaturas/crear/`, data);
+  }
+
+  asignarAsignaturaAUsuario(usuarioId: number, asignaturaId: number): Observable<any> {
+    return this.http.post(`${this.apiURL}/accounts/asignaturas/asignar/${usuarioId}/${asignaturaId}/`, {});
+  }
 }

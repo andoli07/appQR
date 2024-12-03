@@ -1,8 +1,11 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router';
-import { AnimationController, ModalController } from '@ionic/angular';
+import { Router, NavigationEnd } from '@angular/router';
+import { AnimationController, ModalController, AlertController } from '@ionic/angular';
 import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { BarcodeScanningModalComponent } from './barcode-scanning-modal.component';
 import { ApicontrollerService } from 'src/app/services/apicontroller.service';
+import { ChangeDetectorRef } from '@angular/core';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-perfil',
@@ -10,41 +13,60 @@ import { ApicontrollerService } from 'src/app/services/apicontroller.service';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
-  cards = [
-    { id: 1, title: 'Programación Móvil', content: 'Sección 003_D', imgSrc: 'assets/img/tec.webp' },
-    { id: 2, title: 'Programación Base de Datos', content: 'Sección_008A', imgSrc: 'assets/img/tecno.png' },
-    { id: 3, title: 'Arquitectura', content: 'Sección_002C', imgSrc: 'assets/img/tecnologia.jpg' },
-    { id: 4, title: 'Portafolio', content: 'Sección_005B', imgSrc: 'assets/img/portafolio.jpg' },
-  ];
+  asignaturas: any[] = [];
   selectedSubject: any = null;
   asistencia: any[] = [];
+  asistenciaLength: number = 0;
   isModalOpen = false;
   username: string = '';
+  userId: number = 0;
 
   constructor(private router: Router,
     private animationController: AnimationController, 
     private renderer: Renderer2,
     private modalController: ModalController,
     private alertController: AlertController,
-    private api: ApicontrollerService) {}
+    private api: ApicontrollerService,
+    private changeDetectorRef: ChangeDetectorRef) {}
 
   reloadPageGoHome() {
     this.router.navigate(['/home']).then(() => {
       window.location.href = '/home';
     });
   }
-
+  
   ngOnInit() {
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      this.reloadPage();
+    });
+  }
+
+  reloadPage() {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state) {
       const userInfo = navigation.extras.state['userInfo'];
       this.username = userInfo?.username ?? '';
+      this.userId = userInfo?.id ?? null;
     }
 
     const profileImage = document.querySelector('.profile-image');
     if (profileImage) {
       this.loopProfileAnimation(profileImage as HTMLElement);
     }
+
+    this.getAsignaturasPorUsuario();
+  }
+
+  getAsignaturasPorUsuario(): void {
+    this.api.getAsignaturasPorUsuario(this.userId).subscribe(
+      response => {
+        this.asignaturas = response;
+        console.log('Asignaturas fetched:', response);
+      },
+      error => {
+        console.error('Error fetching asignaturas:', error);
+      }
+    );
   }
 
   loopProfileAnimation(element: HTMLElement) {
@@ -58,23 +80,27 @@ export class PerfilPage implements OnInit {
     rotateAnimation.play();
   }
 
-  async onCardSelect(card: any) {
-    this.selectedSubject = card;
-
-    try {
-      const response = await this.api.getAsistencia(card.id).toPromise();
-      this.asistencia = response;
-      this.isModalOpen = true;
-    } catch (error) {
-      console.error('Error al obtener la asistencia:', error);
-      alert('Hubo un problema al obtener la asistencia.');
-    }
+  onCardSelect(asignatura: any) {
+    console.log('Card selected:', asignatura);
+    this.selectedSubject = asignatura;
+    this.api.getAsistenciaPorAsignatura(asignatura.id).subscribe(
+      response => {
+        this.asistencia = response;
+        this.asistenciaLength = this.asistencia.reduce((contador, item) => contador + item.contador, 0);
+        console.log('Asistencia:', this.asistencia);
+        console.log('Asistencia Length:', this.asistenciaLength);
+        this.isModalOpen = true;
+        this.changeDetectorRef.detectChanges();
+      },
+      error => {
+        console.error('Error fetching asistencia:', error);
+      }
+    );
   }
 
-  closeModal() {
+  closeModal(): void {
+    console.log('Closing modal');
     this.isModalOpen = false;
-    this.selectedSubject = null;
-    this.asistencia = [];
   }
 
   async openScanner(): Promise<void> {
@@ -120,15 +146,28 @@ export class PerfilPage implements OnInit {
   }
 
   private async showScannedCodeAlert(scannedText: string): Promise<void> {
+    this.handleQrCodeScanned(scannedText);
     const alert = await this.alertController.create({
       header: 'Código Escaneado',
-      message: scannedText || 'No se pudo leer el código.',
+      message:'Asistencia tomada con exito!',
       buttons: ['OK'],
     });
     await alert.present();
   }
 
-  navigateToQrPage() {
-    this.router.navigate(['/qrpage']);
+  private async handleQrCodeScanned(scannedText: string): Promise<void> {
+    const scannedNumber = Number(scannedText);
+    if (!isNaN(scannedNumber)) {
+      this.api.incrementarAsistencia(scannedNumber, this.userId).subscribe(
+      response => { 
+        console.log('Request sent successfully', response);
+      },
+      error => {
+        console.error('Error sending request', error);
+      }
+      );
+    } else {
+      console.error('Scanned text is not a valid number:', scannedText);
+    }
   }
 }

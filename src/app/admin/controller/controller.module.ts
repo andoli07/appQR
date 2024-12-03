@@ -8,6 +8,8 @@ import { ControllerPageRoutingModule } from './controller-routing.module';
 
 import { ControllerPage } from './controller.page';
 
+import { AsignarAsignaturaModalPage } from 'src/app/access/asignar-asignatura-modal/asignar-asignatura-modal.page';
+
 @NgModule({
   imports: [
     CommonModule,

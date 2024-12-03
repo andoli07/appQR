@@ -45,7 +45,11 @@ const routes: Routes = [
   {
     path: 'qr',
     loadChildren: () => import('./access/qr/qr.module').then( m => m.QrPageModule)
+  },  {
+    path: 'asignar-asignatura-modal',
+    loadChildren: () => import('./access/asignar-asignatura-modal/asignar-asignatura-modal.module').then( m => m.AsignarAsignaturaModalPageModule)
   },
+
 
 
 

@@ -34,7 +34,7 @@ export class HomePage {
           }
         };
 
-        this.authService.login();
+        this.authService.login(token);
         this.message = '';
 
         if (this.user.username.toLowerCase() === 'profesor') {

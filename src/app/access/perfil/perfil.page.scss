@@ -1,9 +1,7 @@
-/* Degradado de amarillo a azul oscuro para el fondo */
 ion-content {
   --background: linear-gradient(to bottom, #d6af00, #ffffff, #000b3b); 
 }
 
-/* Sección del perfil */
 .profile-section {
   padding: 16px;
   display: flex;
@@ -146,7 +144,6 @@ ion-col:nth-child(4) {
   color: rgb(0, 0, 0);
 }
 
-/* Estilo para el logo de Duoc UC */
 .logo-duoc {
   position: absolute;
   top: 10px;
@@ -155,48 +152,60 @@ ion-col:nth-child(4) {
   height: auto;
 }
 
-/* Estilo general para el fondo */
 ion-content {
   --background: linear-gradient(to bottom, #d6af00, #ffffff, #000b3b); 
 }
 
-/* Ajuste del modal */
 ion-modal {
   --width: 80%;
   --height: auto;
   --border-radius: 10px;
 }
 
-/* Títulos del modal */
 ion-modal ion-title {
-  font-size: 1.5rem; /* Tamaño más grande para el título */
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
 }
 
-/* Texto general del modal */
 ion-modal ion-label {
-  font-size: 1.2rem; /* Tamaño más grande para las etiquetas */
+  font-size: 1.2rem;
   line-height: 1.6;
 }
 
-/* Botón cerrar en el modal */
 ion-modal ion-button {
   font-size: 1.1rem;
 }
 
-/* Estilo de las listas */
 ion-list {
   margin-top: 20px;
 }
 
 ion-item {
-  font-size: 1.2rem; /* Texto más grande en los elementos de la lista */
+  font-size: 1.2rem;
   line-height: 1.6;
 }
 
 ion-modal ion-title {
-  color: #000; /* Asegúrate de que el color sea visible */
-  font-size: 20px; /* Tamaño de fuente legible */
-  text-align: center; /* Centra el texto */
+  color: #000; 
+  font-size: 20px; 
+  text-align: center;
+}
+
+ion-card {
+  width: 100%;
+  position: relative;
+}
+
+ion-card::before {
+  content: none;
+}
+
+ion-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
 }

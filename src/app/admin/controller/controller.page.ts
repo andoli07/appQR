@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApicontrollerService } from 'src/app/services/apicontroller.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { AsignarAsignaturaModalPage } from 'src/app/access/asignar-asignatura-modal/asignar-asignatura-modal.page';
 
 @Component({
   selector: 'app-controller',
@@ -10,11 +11,15 @@ import { AlertController } from '@ionic/angular';
 export class ControllerPage implements OnInit {
 
   users: any[] = [];
+  asignaturas: any[] = [];
 
-  constructor(private api: ApicontrollerService, private alertController: AlertController) { }
+  constructor(private api: ApicontrollerService,
+    private alertController: AlertController,
+    private modalController: ModalController) { }
 
   ngOnInit() {
     this.cargarUsuarios();
+    this.cargarAsignaturas();
   }
 
   cargarUsuarios() {
@@ -27,6 +32,73 @@ export class ControllerPage implements OnInit {
         console.log("Error en la llamada: " + error);
       }
     );
+  }
+
+  cargarAsignaturas() {
+    this.api.getAsignaturas().subscribe(
+      (data) => {
+        this.asignaturas = data;
+        console.log(this.asignaturas);
+      },
+      (error) => {
+        console.log("Error en la llamada: " + error);
+      }
+    );
+  }
+
+  async crearAsignatura() {
+    const alert = await this.alertController.create({
+      header: 'Crear Asignatura',
+      inputs: [
+        {
+          name: 'nombre',
+          type: 'text',
+          placeholder: 'Nombre de Asignatura'
+        },
+        {
+          name: 'descripcion',
+          type: 'text',
+          placeholder: 'Descripción'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Confirmar',
+          handler: (data) => {
+            this.api.crearAsignatura(data).subscribe(response => {
+              console.log('Asignatura creada:', response);
+            }, error => {
+              console.error("Error al crear asignatura: ", error);
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async asignarAsignaturaAUsuario() {
+    const modal = await this.modalController.create({
+      component: AsignarAsignaturaModalPage
+    });
+
+    modal.onDidDismiss().then((result) => {
+      if (result.data) {
+        const { usuarioId, asignaturaId } = result.data;
+        this.api.asignarAsignaturaAUsuario(usuarioId, asignaturaId).subscribe(response => {
+          console.log('Asignatura asignada:', response);
+        }, error => {
+          console.error("Error al asignar asignatura: ", error);
+        });
+      }
+    });
+
+    await modal.present();
   }
 
   async addUser() {
@@ -58,7 +130,7 @@ export class ControllerPage implements OnInit {
           text: 'Confirmar',
           handler: (data) => {
             this.api.postUser(data).subscribe(response => {
-              this.cargarUsuarios(); // Recargar usuarios después de agregar
+              this.cargarUsuarios();
             }, error => {
               console.error("Error al agregar usuario: ", error);
             });
@@ -71,7 +143,7 @@ export class ControllerPage implements OnInit {
   }
 
   async editUser(index: number) {
-    const user = this.users[index];  // Obtener los datos del usuario seleccionado
+    const user = this.users[index];
   
     const alert = await this.alertController.create({
       header: 'Editar Usuario',
@@ -79,19 +151,19 @@ export class ControllerPage implements OnInit {
         {
           name: 'username',
           type: 'text',
-          value: user.username,  // Prellenar con el valor actual
+          value: user.username, 
           placeholder: 'Nombre de Usuario'
         },
         {
           name: 'password',
           type: 'password',
-          value: user.password,  // Prellenar con el valor actual
+          value: user.password,
           placeholder: 'Contraseña'
         },
         {
           name: 'email',
           type: 'text',
-          value: user.email,  // Prellenar con el valor actual
+          value: user.email, 
           placeholder: 'Correo Electrónico'
         }
       ],
@@ -110,9 +182,8 @@ export class ControllerPage implements OnInit {
               email: data.email
             };
   
-            // Llamar al servicio para actualizar los datos en el backend
             this.api.updateUser(updatedUser.id, updatedUser).subscribe(() => {
-              this.cargarUsuarios();  // Recargar la lista de usuarios después de la actualización
+              this.cargarUsuarios(); 
             }, (error) => {
               console.error("Error al actualizar usuario:", error);
             });
@@ -128,7 +199,7 @@ export class ControllerPage implements OnInit {
   deleteUser(index: number) {
     const userId = this.users[index].id;
     this.api.deleteUser(userId).subscribe(() => {
-      this.cargarUsuarios(); // Recargar usuarios después de eliminar
+      this.cargarUsuarios();
     }, (error) => {
       console.error("Error al eliminar usuario:", error);
     });
