@@ -7,9 +7,6 @@ const routes: Routes = [
   {
     path: '',
     component: ProfesorPage
-  },  {
-    path: 'generarqr',
-    loadChildren: () => import('./generarqr/generarqr.module').then( m => m.GenerarqrPageModule)
   }
 
 ];

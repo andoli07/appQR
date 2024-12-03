@@ -6,7 +6,7 @@
   </ion-header>
 
   <ion-content class="ion-padding">
-    <ion-button expand="block">Ver asistencia</ion-button>
+    <ion-button expand="block" routerLink="/qr">Ver asistencia</ion-button>
     <ion-button expand="block" (click)="reloadPageGoHome()">Cerrar sesión</ion-button>
     <ion-button expand="block" routerLink="/controller">Admin Panel</ion-button>
     
@@ -57,7 +57,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-button class="circular-button" fill="solid" shape="round" color="warning" (click)="scanQR()">
+  <ion-button class="circular-button" fill="solid" shape="round" color="warning" (click)="openScanner()">
     <ion-icon name="qr-code-outline"></ion-icon>
   </ion-button>
 </ion-content>

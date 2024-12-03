@@ -4,17 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { GenerarqrPageRoutingModule } from './generarqr-routing.module';
+import { QrPageRoutingModule } from './qr-routing.module';
 
-import { GenerarqrPage } from './generarqr.page';
+import { QRPage } from './qr.page';
+import { QrCodeModule } from 'ng-qrcode';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GenerarqrPageRoutingModule
+    QrPageRoutingModule,
+    QrCodeModule
   ],
-  declarations: [GenerarqrPage]
+  declarations: [QRPage]
 })
-export class GenerarqrPageModule {}
+export class QrPageModule {}
