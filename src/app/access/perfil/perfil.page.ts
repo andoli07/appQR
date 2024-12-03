@@ -34,9 +34,7 @@ export class PerfilPage implements OnInit {
   }
 
   ngOnInit() {
-     //get userInfo from home
     const navigation = this.router.getCurrentNavigation();
-     //display Username
     if (navigation?.extras.state) {
       const userInfo = navigation.extras.state['userInfo'];
       console.log("UserInfo received:", userInfo);
@@ -110,19 +108,17 @@ export class PerfilPage implements OnInit {
   }
 
   async openScanner(): Promise<void> {
-    // Solicitar permisos de cámara
     const hasPermission = await this.requestCameraPermission();
     if (!hasPermission) {
       this.showPermissionAlert();
       return;
     }
 
-    // Abrir el modal del escáner si se otorgaron los permisos
     const modal = await this.modalController.create({
       component: BarcodeScanningModalComponent,
       componentProps: {
-        formats: ['QR_CODE', 'EAN_13'], // Formatos deseados
-        lensFacing: 'back', // Lente trasera
+        formats: ['QR_CODE', 'EAN_13'],
+        lensFacing: 'back',
       },
       cssClass: 'barcode-scanning-modal',
     });
@@ -131,7 +127,6 @@ export class PerfilPage implements OnInit {
       if (result.data && result.data.barcode) {
         const scannedText = result.data.barcode.rawValue;
         console.log('Código escaneado:', scannedText);
-        // Mostrar el texto escaneado en una alerta
         await this.showScannedCodeAlert(scannedText);
       }
     });
@@ -139,13 +134,12 @@ export class PerfilPage implements OnInit {
     await modal.present();
   }
 
-  // Método para solicitar permisos de cámara
   private async requestCameraPermission(): Promise<boolean> {
     const { camera } = await BarcodeScanner.requestPermissions();
     return camera === 'granted' || camera === 'limited';
   }
 
-  // Mostrar alerta si no se otorgaron los permisos
+
   private async showPermissionAlert(): Promise<void> {
     const alert = await this.alertController.create({
       header: 'Permiso denegado',
@@ -155,7 +149,6 @@ export class PerfilPage implements OnInit {
     await alert.present();
   }
 
-  // Mostrar alerta con el texto escaneado
   private async showScannedCodeAlert(scannedText: string): Promise<void> {
     const alert = await this.alertController.create({
       header: 'Código Escaneado',
