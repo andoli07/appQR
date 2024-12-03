@@ -37,9 +37,14 @@ const routes: Routes = [
     path: 'controller',
     loadChildren: () => import('./admin/controller/controller.module').then( m => m.ControllerPageModule),
     canActivate: [authGuard]
-  },  {
+  },
+  {
     path: 'profesor',
     loadChildren: () => import('./access/profesor/profesor.module').then( m => m.ProfesorPageModule)
+  },
+  {
+    path: 'qr',
+    loadChildren: () => import('./access/qr/qr.module').then( m => m.QrPageModule)
   },
 
 
