@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Generador de QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="qr-container">
+    <qr-code [value]="textQR" [size]="190"></qr-code>
+  </div>
+  <ion-item>
+    <ion-label>Seleccionar Clase</ion-label>
+    <ion-select [(ngModel)]="selectedClassId" (ionChange)="onClassChange($event)">
+      <ion-select-option *ngFor="let asignatura of asignaturas" [value]="asignatura.id">{{ asignatura.nombre }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button expand="full" (click)="generarQRCode()">Generar QR</ion-button>
+</ion-content>

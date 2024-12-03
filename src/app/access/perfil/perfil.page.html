@@ -6,10 +6,9 @@
   </ion-header>
 
   <ion-content class="ion-padding">
-    <ion-button expand="block">Ver asistencia</ion-button>
+    <ion-button expand="block" routerLink="/qr">Generar QR</ion-button>
     <ion-button expand="block" (click)="reloadPageGoHome()">Cerrar sesión</ion-button>
     <ion-button expand="block" routerLink="/controller">Admin Panel</ion-button>
-    
   </ion-content>
 </ion-menu>
 
@@ -38,30 +37,54 @@
         </div>
         <ion-card-title>¡Bienvenido, {{username}}!</ion-card-title>
       </ion-card-header>
-
-      <ion-card-content>
-        ¿En cuál asignatura deseas marcar tu asistencia?
-      </ion-card-content>
     </ion-card>
   </div>
 
   <ion-grid>
     <ion-row>
-      <ion-col size="12" *ngFor="let card of cards; let i = index" style="margin-top: 10px;">
-        <ion-card class="card animated" (click)="onCardSelect(i)">
-          <img [src]="card.imgSrc" alt="{{card.title}}" style="width: 100%; height: auto;" />
+      <ion-col size="12" *ngFor="let asignatura of asignaturas; let i = index" style="margin-top: 10px;">
+        <ion-card class="card animated" (click)="onCardSelect(asignatura)">
           <ion-card-header>
-            <ion-card-title>{{ card.title }}</ion-card-title>
+            <ion-card-title>{{ asignatura.nombre }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            {{ card.content }}
+            {{ asignatura.descripcion }}
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-button class="circular-button" fill="solid" shape="round" color="warning">
+  <ion-button class="circular-button" fill="solid" shape="round" color="warning" (click)="openScanner()">
     <ion-icon name="qr-code-outline"></ion-icon>
   </ion-button>
+
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Asistencia de {{ selectedSubject?.nombre }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeModal()">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <div *ngIf="asistencia.length > 0; else noAsistencia">
+        <ion-list>
+          <ion-item *ngFor="let registro of asistencia">
+            <ion-label>
+              Fecha: {{ registro.fecha_asistencia }}<br />
+              Asistencia: {{ registro.contador }}<br />
+              Asignatura: {{ selectedSubject?.nombre }}
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-label>Total de asistencias: {{ asistenciaLength }}</ion-label>
+      </div>
+      <ng-template #noAsistencia>
+        <ion-label>No tiene asistencia en este curso.</ion-label>
+      </ng-template>
+    </ion-content>
+  </ion-modal>
+  
 </ion-content>

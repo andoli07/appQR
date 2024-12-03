@@ -8,6 +8,8 @@ import { PerfilPageRoutingModule } from './perfil-routing.module';
 
 import { PerfilPage } from './perfil.page';
 
+import { BarcodeScanningModalComponent } from './barcode-scanning-modal.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,6 @@ import { PerfilPage } from './perfil.page';
     IonicModule,
     PerfilPageRoutingModule
   ],
-  declarations: [PerfilPage]
+  declarations: [PerfilPage, BarcodeScanningModalComponent]
 })
 export class PerfilPageModule {}
